@@ -1,0 +1,38 @@
+#!/sbin/openrc-run
+# Copyright 1999-2017 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need localmount
+}
+
+start() {
+	ebegin "Starting teamcity server"
+
+    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/dashboards"
+    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/plugins"
+    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/sessions"
+
+	start-stop-daemon --start -b \
+		--make-pidfile \
+		--pidfile /run/teamcity.pid \
+		--chdir /usr/share/teamcity \
+		--user ${teamcity_USER}:${teamcity_GROUP} \
+		--exec /usr/bin/teamcity-server -- \
+		-config=/etc/teamcity/teamcity.ini \
+		cfg:default.paths.data=/var/lib/teamcity \
+		cfg:default.paths.logs=/var/log/teamcity
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping teamcity server"
+
+	start-stop-daemon --stop \
+		--pidfile /run/teamcity.pid \
+		--user "${teamcity_USER}" \
+		--retry=TERM/20/KILL/5
+
+	eend $?
+}
