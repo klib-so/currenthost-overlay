@@ -1,0 +1,7 @@
+# Config file for /etc/init.d/teamcity
+
+# The user to run your application as.
+teamcity_USER=teamcity
+
+# The group to run your application as.
+teamcity_GROUP=teamcity

@@ -1,0 +1,25 @@
+[Unit]
+Description=teamcity
+Documentation=http://docs.teamcity.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=teamcity
+Group=teamcity
+Type=simple
+Restart=on-failure
+RuntimeDirectory=teamcity
+WorkingDirectory=/usr/share/teamcity
+ExecStart=/usr/bin/teamcity-server                      \
+    --config=/etc/teamcity/teamcity.ini                  \
+    --pidfile=/run/teamcity/teamcity.pid                 \
+    cfg:default.paths.logs=/var/log/teamcity            \
+    cfg:default.paths.data=/var/lib/teamcity            \
+    cfg:default.paths.plugins=/var/lib/teamcity/plugins
+LimitNOFILE=10000
+TimeoutStopSec=20
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
