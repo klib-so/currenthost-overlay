@@ -13,7 +13,7 @@ S=${WORKDIR}/${MY_PN}-${PV}
 
 DESCRIPTION="Powerful continuous integration for DevOps-centric teams"
 HOMEPAGE="https://www.jetbrains.com/teamcity/"
-SRC_URI="https://download-cdn.jetbrains.com/teamcity/${PN}-${PV}.tar.gz"
+SRC_URI="https://download-cdn.jetbrains.com/teamcity/${MY_PN}-${PV}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
