@@ -69,5 +69,4 @@ Vagrant.configure("2") do |config|
   #  ansible.inventory_path = ""
   #  ansible.playbook = ""
   #end
-
 end

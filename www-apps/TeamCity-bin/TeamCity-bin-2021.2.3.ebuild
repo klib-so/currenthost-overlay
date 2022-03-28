@@ -19,12 +19,9 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
+# jre?
 DEPEND=""
 RDEPEND="${DEPEND}"
-
-#QA_EXECSTACK="usr/share/teamcity/vendor/phantomjs/phantomjs"
-#QA_PREBUILT="usr/bin/teamcity-*"
-#QA_PRESTRIPPED=${QA_EXECSTACK}
 
 pkg_setup() {
 	enewgroup teamcity
@@ -38,7 +35,7 @@ src_install() {
 	rm "${S}"/conf/sample.ini || die
 
 	# Frontend assets
-	insinto /usr/share/${MY_PN}
+	insinto /usr/share/"${MY_PN}"
 	doins -r public conf
 
 	dobin bin/teamcity-cli
@@ -49,11 +46,8 @@ src_install() {
 	#systemd_newunit "${FILESDIR}"/teamcity.service teamcity.service
 
 	keepdir /var/{lib,log}/teamcity
-	#keepdir /var/lib/teamcity/{dashboards,plugins}
 	fowners teamcity:teamcity /var/{lib,log}/teamcity
-	#fowners teamcity:teamcity /var/lib/teamcity/{dashboards,plugins}
 	fperms 0750 /var/{lib,log}/teamcity
-	#fperms 0750 /var/lib/teamcity/{dashboards,plugins}
 }
 
 # postinst() {

@@ -9,10 +9,11 @@ depend() {
 start() {
 	ebegin "Starting teamcity server"
 
-    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/dashboards"
-    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/plugins"
-    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/sessions"
+#    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/dashboards"
+#    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/plugins"
+#    checkpath -d -o "${teamcity_USER}:${teamcity_GROUP}" -m750 "/var/lib/teamcity/sessions"
 
+	# There is some issue with the pid file as the scripts fork and make their own. Referring to the new one didn't help.
 	start-stop-daemon --start -b \
 		--make-pidfile \
 		--pidfile /run/teamcity.pid \
@@ -22,7 +23,6 @@ start() {
 		-config=/etc/teamcity/teamcity.ini \
 		cfg:default.paths.data=/var/lib/teamcity \
 		cfg:default.paths.logs=/var/log/teamcity
-
 	eend $?
 }
 
