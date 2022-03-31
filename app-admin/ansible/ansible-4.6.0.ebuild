@@ -27,11 +27,3 @@ python_install() {
 	local -x ANSIBLE_SKIP_CONFLICT_CHECK=1
 	distutils-r1_python_install
 }
-
-
-
-Questions or comments?
-Please feel free to contact us.
-
-© 2001–2021 Gentoo Foundation, Inc.
-Gentoo is a trademark of the Gentoo Foundation, Inc. The contents of this document, unless otherwise expressly stated, are licensed under the CC-BY-SA-4.0 license. The Gentoo Name and Logo Usage Guidelines apply.
